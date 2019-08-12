@@ -1,1 +1,15 @@
-Program to hide information within images - Using the lsb, you are able to hide data, whether it be images or other types of data within images.
+# steganography
+
+This program hides data within an image using the least significant bit.
+
+# Contribution
+
+If you'd like to contribute to `steganography` please submit a pull-request on a
+feature branch.
+
+# Installing
+
+Clone the repo:
+
+    git clone http://github.com/Sommos/steganography
+    cd steganography
