@@ -1,6 +1,6 @@
-# steganography
+# Steganography
 
-This program hides data within an image using the least significant bit.
+This program hides data within an image using common steganograpghy techniques.
 
 # Contribution
 
