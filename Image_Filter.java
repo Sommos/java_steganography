@@ -7,8 +7,8 @@ public class Image_Filter extends javax.swing.filechooser.FileFilter
 {
 	/*
 	 *Determines if the extension is of the defined types
-	 *@param ext Extension of a file
-	 *@return Returns true if the extension is 'jpg' or 'png'
+	 *@param ext 		extension of a file
+	 *@return 		returns true if the extension is 'jpg' or 'png'
 	 */
 	protected boolean isImageFile(String ext)
 	{
@@ -17,18 +17,18 @@ public class Image_Filter extends javax.swing.filechooser.FileFilter
 	
 	/*
 	 *Determines if the file is a directory or accepted extension
-	 *@param f The File to run the directory/proper extension check on
-	 *@return Returns true if the File is a directory or accepted extension
+	 *@param f 		the File to run the directory/proper extension check on
+	 *@return 		returns true if the File is a directory or accepted extension
 	 */
 	public boolean accept(File f)
 	{
 	    if (f.isDirectory())
 	    {
-			return true;
+	    	return true;
 	    }
 
 	    String extension = getExtension(f);
-		if (extension.equals("jpg")||extension.equals("png"))
+		if (extension.equals("jpg") || extension.equals("png"))
 		{
 			return true;
 		}
@@ -37,7 +37,7 @@ public class Image_Filter extends javax.swing.filechooser.FileFilter
 	
 	/*
 	 *Supplies File type description
-	 *@return Returns the String description
+	 *@return 		returns the String description
 	 */
 	public String getDescription()
 	{
@@ -46,8 +46,8 @@ public class Image_Filter extends javax.swing.filechooser.FileFilter
 	
 	/*
 	 *Determines the Extension
-	 *@param f File to return the extension of
-	 *@return Returns the String representing the extension
+	 *@param f 		file to return the extension of
+	 *@return 		returns the String representing the extension
 	 */
 	protected static String getExtension(File f)
 	{
