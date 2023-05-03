@@ -15,59 +15,54 @@ import javax.swing.JFileChooser;
 
 public class Steganography_Controller
 {
-	//Program Variables
-	private Steganography_View	view;
-	private Steganography		model;
-	
-	//Panel Displays
-	private JPanel		decode_panel;
-	private JPanel		encode_panel;
-	//Panel Variables
-	private JTextArea 	input;
-	private JButton		encodeButton,decodeButton;
-	private JLabel		image_input;
-	//Menu Variables
-	private JMenuItem 	encode;
-	private JMenuItem 	decode;
-	private JMenuItem 	exit;
-	
-	//action event classes
-	private Encode			enc;
-	private Decode			dec;
-	private EncodeButton	encButton;
-	private DecodeButton	decButton;
-	
-	//decode variable
-	private String			stat_path = "";
-	private String			stat_name = "";
+	// program variables
+	private Steganography_View view;
+	private Steganography model;
+	// panel displays
+	private JPanel decode_panel;
+	private JPanel encode_panel;
+	// panel variables
+	private JTextArea input;
+	private JButton encodeButton,decodeButton;
+	private JLabel image_input;
+	// menu variables
+	private JMenuItem encode;
+	private JMenuItem decode;
+	private JMenuItem exit;
+	// action event classes
+	private Encode enc;
+	private Decode dec;
+	private EncodeButton encButton;
+	private DecodeButton decButton;
+	// decode variable
+	private String stat_path = "";
+	private String stat_name = "";
 	
 	/*
 	 *Constructor to initialize view, model and environment variables
-	 *@param aView  A GUI class, to be saved as view
-	 *@param aModel A model class, to be saved as model
+	 *@param aView		a GUI class, to be saved as view
+	 *@param aModel 	a model class, to be saved as model
 	 */
 	public Steganography_Controller(Steganography_View aView, Steganography aModel)
 	{
-		//program variables
-		view  = aView;
+		// program variables
+		view = aView;
 		model = aModel;
-		
-		//assign View Variables
-		//2 views
-		encode_panel	= view.getTextPanel();
-		decode_panel	= view.getImagePanel();
-		//2 data options
-		input			= view.getText();
-		image_input		= view.getImageInput();
-		//2 buttons
-		encodeButton	= view.getEButton();
-		decodeButton	= view.getDButton();
-		//menu
-		encode			= view.getEncode();
-		decode			= view.getDecode();
-		exit			= view.getExit();
-		
-		//assign action events
+		// assign view variables
+		// 2 views
+		encode_panel = view.getTextPanel();
+		decode_panel = view.getImagePanel();
+		// 2 data options
+		input = view.getText();
+		image_input = view.getImageInput();
+		// 2 buttons
+		encodeButton = view.getEButton();
+		decodeButton = view.getDButton();
+		// menu
+		encode = view.getEncode();
+		decode = view.getDecode();
+		exit = view.getExit();
+		// assign action events
 		enc = new Encode();
 		encode.addActionListener(enc);
 		dec = new Decode();
@@ -77,8 +72,7 @@ public class Steganography_Controller
 		encodeButton.addActionListener(encButton);
 		decButton = new DecodeButton();
 		decodeButton.addActionListener(decButton);
-		
-		//encode view as default
+		// encode view as default
 		encode_view();
 	}
 	
@@ -109,11 +103,12 @@ public class Steganography_Controller
 	{
 		/*
 		 *handles the click event
-		 *@param e The ActionEvent Object
+		 *@param e 		the ActionEvent Object
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
-			encode_view(); //show the encode view
+			// show the encode view
+			encode_view();
 		}
 	}
 	
@@ -124,13 +119,14 @@ public class Steganography_Controller
 	{
 		/*
 		 *handles the click event
-		 *@param e The ActionEvent Object
+		 *@param e 		the ActionEvent Object
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
-			decode_view(); //show the decode view
+			// show the decode view
+			decode_view(); 
 			
-			//start path of displayed File Chooser
+			// start path of displayed File Chooser
 			JFileChooser chooser = new JFileChooser("./");
 			chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			chooser.setFileFilter(new Image_Filter());
@@ -146,9 +142,13 @@ public class Steganography_Controller
 					image_input.setIcon(new ImageIcon(ImageIO.read(new File(image))));
 				}
 				catch(Exception except) {
-				//msg if opening fails
-				JOptionPane.showMessageDialog(view, "The File cannot be opened!", 
-					"Error!", JOptionPane.INFORMATION_MESSAGE);
+					// message if opening fails
+					JOptionPane.showMessageDialog(
+						view, 
+						"The File cannot be opened!", 
+						"Error!", 
+						JOptionPane.INFORMATION_MESSAGE
+					);
 				}
 			}
 		}
@@ -161,11 +161,12 @@ public class Steganography_Controller
 	{
 		/*
 		 *handles the click event
-		 *@param e The ActionEvent Object
+		 *@param e 		the ActionEvent Object
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
-			System.exit(0); //exit the program
+			// exit the program
+			System.exit(0); 
 		}
 	}
 	
@@ -176,11 +177,11 @@ public class Steganography_Controller
 	{
 		/*
 		 *handles the click event
-		 *@param e The ActionEvent Object
+		 *@param e 		the ActionEvent Object
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
-			//start path of displayed File Chooser
+			// start path of displayed File Chooser
 			JFileChooser chooser = new JFileChooser("./");
 			chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			chooser.setFileFilter(new Image_Filter());
@@ -189,34 +190,49 @@ public class Steganography_Controller
 				File directory = chooser.getSelectedFile();
 				try{
 					String text = input.getText();
-					String ext  = Image_Filter.getExtension(directory);
+					String ext = Image_Filter.getExtension(directory);
 					String name = directory.getName();
 					String path = directory.getPath();
 					path = path.substring(0,path.length()-name.length()-1);
 					name = name.substring(0, name.length()-4);
 					
-					String stegan = JOptionPane.showInputDialog(view,
-									"Enter output file name:", "File name",
-									JOptionPane.PLAIN_MESSAGE);
+					String stegan = JOptionPane.showInputDialog(
+									view,
+									"Enter output file name:", 
+									"File name",
+									JOptionPane.PLAIN_MESSAGE
+					);
 					
 					if(model.encode(path,name,ext,stegan,text))
 					{
-						JOptionPane.showMessageDialog(view, "The Image was encoded Successfully!", 
-							"Success!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(
+							view, 
+							"The Image was encoded Successfully!", 
+							"Success!", 
+							JOptionPane.INFORMATION_MESSAGE
+						);
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(view, "The Image could not be encoded!", 
-							"Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(
+							view, 
+							"The Image could not be encoded!", 
+							"Error!", 
+							JOptionPane.INFORMATION_MESSAGE
+						);
 					}
-					//display the new image
+					// display the new image
 					decode_view();
 					image_input.setIcon(new ImageIcon(ImageIO.read(new File(path + "/" + stegan + ".png"))));
 				}
 				catch(Exception except) {
-				//msg if opening fails
-				JOptionPane.showMessageDialog(view, "The File cannot be opened!", 
-					"Error!", JOptionPane.INFORMATION_MESSAGE);
+				// message if opening fails
+					JOptionPane.showMessageDialog(
+						view, 
+						"The File cannot be opened!", 
+						"Error!", 
+						JOptionPane.INFORMATION_MESSAGE
+					);
 				}
 			}
 		}
@@ -230,7 +246,7 @@ public class Steganography_Controller
 	{
 		/*
 		 *handles the click event
-		 *@param e The ActionEvent Object
+		 *@param e 		the ActionEvent Object
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
@@ -239,14 +255,22 @@ public class Steganography_Controller
 			if(message != "")
 			{
 				encode_view();
-				JOptionPane.showMessageDialog(view, "The Image was decoded Successfully!", 
-							"Success!", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(
+					view, 
+					"The Image was decoded Successfully!", 
+					"Success!", 
+					JOptionPane.INFORMATION_MESSAGE
+				);
 				input.setText(message);
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(view, "The Image could not be decoded!", 
-							"Error!", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(
+					view, 
+					"The Image could not be decoded!", 
+					"Error!", 
+					JOptionPane.INFORMATION_MESSAGE
+				);
 			}
 		}
 	}
@@ -256,10 +280,14 @@ public class Steganography_Controller
 	 */
 	public void update()
 	{
-		input.setText("");			//clear textarea
-		image_input.setIcon(null);	//clear image
-		stat_path = "";				//clear path
-		stat_name = "";				//clear name
+		// clear text area
+		input.setText("");	
+		// clear image
+		image_input.setIcon(null);
+		// clear path
+		stat_path = "";		
+		// clear name
+		stat_name = "";				
 	}
 	
 	/*
@@ -268,8 +296,8 @@ public class Steganography_Controller
 	public static void main(String args[])
 	{
 		new Steganography_Controller(
-									new Steganography_View("Steganography"),
-									new Steganography()
-									);
+			new Steganography_View("Steganography"),
+			new Steganography()
+		);
 	}
 }
