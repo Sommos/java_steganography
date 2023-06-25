@@ -17,8 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 
 /*
- *Class Steganography_View
- */
+ *class Steganography_View
+*/
 public class Steganography_View extends JFrame
 {
 	// size variables for window
@@ -38,9 +38,9 @@ public class Steganography_View extends JFrame
 	private JMenuItem exit;
 	
 	/*
-	 *Constructor for Steganography_View class
+	 *constructor for Steganography_View class
 	 *@param name 		used to set the title on the JFrame
-	 */
+	*/
 	public Steganography_View(String name)
 	{
 		// set the title of the JFrame
@@ -74,77 +74,77 @@ public class Steganography_View extends JFrame
 	}
 	
 	/*
-	 *@return The menu item 'Encode'
-	 */
+	 *@return the menu item 'Encode'
+	*/
 	public JMenuItem getEncode()
 	{ 
 		return encode;			
 	}
 	/*
-	 *@return The menu item 'Decode'
-	 */
+	 *@return the menu item 'Decode'
+	*/
 	public JMenuItem getDecode()
 	{ 
 		return decode;			
 	}
 	/*
-	 *@return The menu item 'Exit'
-	 */
+	 *@return the menu item 'Exit'
+	*/
 	public JMenuItem getExit()	
 	{ 
 		return exit;				
 	}
 	/*
-	 *@return The TextArea containing the text to encode
-	 */
+	 *@return the TextArea containing the text to encode
+	*/
 	public JTextArea getText()		
 	{ 
 		return input;				
 	}
 	/*
-	 *@return The JLabel containing the image to decode text from
-	 */
+	 *@return the JLabel containing the image to decode text from
+	*/
 	public JLabel getImageInput()	
 	{ 
 		return image_input;		
 	}
 	/*
-	 *@return The JPanel displaying the Encode View
-	 */
+	 *@return the JPanel displaying the encode view
+	*/
 	public JPanel getTextPanel()	
 	{ 
 		return new Text_Panel();	
 	}
 	/*
-	 *@return The JPanel displaying the Decode View
-	 */
+	 *@return the JPanel displaying the decode view
+	*/
 	public JPanel getImagePanel()	
 	{ 
 		return new Image_Panel();	
 	}
 	/*
-	 *@return The Encode button
-	 */
+	 *@return the encode button
+	*/
 	public JButton getEButton()	
 	{ 
 		return encodeButton;		
 	}
 	/*
-	 *@return The Decode button
-	 */
+	 *@return the decode button
+	*/
 	public JButton getDButton()	
 	{ 
 		return decodeButton;		
 	}
 	
 	/*
-	 *Class Text_Panel
-	 */
+	 *class Text_Panel
+	*/
 	private class Text_Panel extends JPanel
 	{
 		/*
-		 *Constructor to enter text to be encoded
-		 */
+		 *constructor to enter text to be encoded
+		*/
 		public Text_Panel()
 		{
 			// setup GridBagLayout
@@ -187,13 +187,13 @@ public class Steganography_View extends JFrame
 	}
 	
 	/*
-	 *Class Image_Panel
-	 */
+	 *class Image_Panel
+	*/
 	private class Image_Panel extends JPanel
 	{
 		/*
-		 *Constructor for displaying an image to be decoded
-		 */
+		 *constructor for displaying an image to be decoded
+		*/
 		public Image_Panel()
 		{
 			// setup GridBagLayout
@@ -240,8 +240,8 @@ public class Steganography_View extends JFrame
 	 }
 	
 	/*
-	 *Main Method for testing
-	 */
+	 *main method for testing
+	*/
 	public static void main(String args[])
 	{
 		new Steganography_View("Steganography");
