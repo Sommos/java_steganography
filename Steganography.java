@@ -9,23 +9,24 @@ import javax.swing.JOptionPane;
 
 public class Steganography{
 	public static void main(String[] args) {
+		
 	}
 	
 	/*
-	 *Encrypt an image with text, the output file will be of type .png
+	 *encrypt an image with text, the output file will be of type .png
 	 *@param path		the path (folder) containing the image to modify
 	 *@param original	the name of the image to modify
 	 *@param ext1		the extension type of the image to modify (jpg, png)
 	 *@param stegan	  	the output name of the file
 	 *@param message  	the text to hide in the image
 	 *@param type		integer representing either basic or advanced encoding
-	 */
+	*/
 	public boolean encode(String path, String original, String ext1, String stegan, String message)
 	{
 		String file_name = image_path(path,original,ext1);
 		BufferedImage image_orig = getImage(file_name);
 		
-		// user space is not necessary for Encrypting
+		// user space is not necessary for encryption
 		BufferedImage image = user_space(image_orig);
 		image = add_text(image,message);
 		
@@ -33,17 +34,17 @@ public class Steganography{
 	}
 	
 	/*
-	 *Decrypt assumes the image being used is of type .png, extracts the hidden text from an image
+	 *decrypt assumes the image being used is of type .png, extracts the hidden text from an image
 	 *@param path   	the path (folder) containing the image to extract the message from
 	 *@param name 		the name of the image to extract the message from
 	 *@param type		integer representing either basic or advanced encoding
-	 */
+	*/
 	public String decode(String path, String name)
 	{
 		byte[] decode;
 		try
 		{
-			// user space is necessary for decrypting
+			// user space is necessary for decryption
 			BufferedImage image  = user_space(getImage(image_path(path,name,"png")));
 			decode = decode_text(get_byte_data(image));
 			return(new String(decode));
@@ -61,23 +62,23 @@ public class Steganography{
 	}
 	
 	/*
-	 *Returns the complete path of a file, in the form: path\name.ext
+	 *returns the complete path of a file, in the form: path\name.ext
 	 *@param path		the path (folder) of the file
 	 *@param name 		the name of the file
 	 *@param ext	  	the extension of the file
 	 *@return 		a String representing the complete path of a file
-	 */
+	*/
 	private String image_path(String path, String name, String ext)
 	{
 		return path + "/" + name + "." + ext;
 	}
 	
 	/*
-	 *Get method to return an image file
+	 *get method to return an image file
 	 *@param f		the complete path name of the image.
 	 *@return A 		bufferedImage of the supplied file path
 	 *@see			steganography.image_path
-	 */
+	*/
 	private BufferedImage getImage(String f)
 	{
 		BufferedImage image = null;
@@ -100,12 +101,12 @@ public class Steganography{
 	}
 	
 	/*
-	 *Set method to save an image file
+	 *set method to save an image file
 	 *@param image		the image file to save
 	 *@param file	  	file  to save the image to
 	 *@param ext	 	the extension and thus format of the file to be saved
 	 *@return 		returns true if the save is succesful
-	 */
+	*/
 	private boolean setImage(BufferedImage image, File file, String ext)
 	{
 		try
@@ -128,20 +129,20 @@ public class Steganography{
 	}
 	
 	/*
-	 *Handles the addition of text into an image
+	 *handles the addition of text into an image
 	 *@param image		the image to add hidden text to
 	 *@param text	 	the text to hide in the image
 	 *@return 		returns the image with the text embedded in it
-	 */
+	*/
 	private BufferedImage add_text(BufferedImage image, String text)
 	{
-		// convert all items to byte arrays: image, message, message length
+		// convert all items to byte arrays
 		byte img[]  = get_byte_data(image);
 		byte msg[] = text.getBytes();
 		byte len[]   = bit_conversion(msg.length);
 		try
 		{
-			// 0 bytes of space for first positiong
+			// 0 bytes of space for first position
 			encode_text(img, len,  0);
 			// 4 bytes of space for length: 4 bytes * 8 bit = 32 bits
 			encode_text(img, msg, 32); 
@@ -159,10 +160,10 @@ public class Steganography{
 	}
 	
 	/*
-	 *Creates a user space version of a Buffered Image, for editing and saving bytes
+	 *creates a user space version of a Buffered Image, for editing and saving bytes
 	 *@param image		the image to put into user space, removes compression interferences
 	 *@return 		the user space version of the supplied image
-	 */
+	*/
 	private BufferedImage user_space(BufferedImage image)
 	{
 		// create new_img with the attributes of image
@@ -175,13 +176,13 @@ public class Steganography{
 	}
 	
 	/*
-	 *Gets the byte array of an image
+	 *gets the byte array of an image
 	 *@param image 		the image to get byte data from
 	 *@return 		returns the byte array of the image supplied
 	 *@see 			Raster
 	 *@see 			WritableRaster
 	 *@see 			DataBufferByte
-	 */
+	*/
 	private byte[] get_byte_data(BufferedImage image)
 	{
 		WritableRaster raster = image.getRaster();
@@ -190,10 +191,10 @@ public class Steganography{
 	}
 	
 	/*
-	 *Gernerates proper byte format of an integer
+	 *gernerates proper byte format of an integer
 	 *@param i 		the integer to convert
 	 *@return 		returns a byte[4] array converting the supplied integer into bytes
-	 */
+	*/
 	private byte[] bit_conversion(int i)
 	{
 		// originally integers (ints) cast into bytes
@@ -207,30 +208,30 @@ public class Steganography{
 		byte byte2 = (byte)((i & 0x00FF0000) >>> 16); //0
 		byte byte1 = (byte)((i & 0x0000FF00) >>> 8 ); //0
 		byte byte0 = (byte)((i & 0x000000FF));
-		// {0,0,0,byte0} is equivalent, since all shifts >= 8 will be 0
+		// {0, 0, 0, byte0} is equivalent, since all shifts >= 8 will be 0
 		return(new byte[]{byte3,byte2,byte1,byte0});
 	}
 	
 	/*
-	 *Encode an array of bytes into another array of bytes at a supplied offset
+	 *encode an array of bytes into another array of bytes at a supplied offset
 	 *@param image		array of data representing an image
 	 *@param addition 	array of data to add to the supplied image data array
 	 *@param offset	  	the offset into the image array to add the addition data
 	 *@return 		returns data Array of merged image and addition data
-	 */
+	*/
 	private byte[] encode_text(byte[] image, byte[] addition, int offset)
 	{
-		// check that the data + offset will fit in the image
+		// check that the data and offset will fit in the image
 		if(addition.length + offset > image.length)
 		{
 			throw new IllegalArgumentException("File not long enough!");
 		}
-		// loop through each addition byte
+		// loop through each additional byte
 		for(int i = 0; i < addition.length; ++i)
 		{
 			// loop through the 8 bits of each byte
 			int add = addition[i];
-			//ensure the new offset value carries on through both loops
+			// ensure the new offset value carries on through both loops
 			for(int bit = 7; bit >= 0; --bit, ++offset) 
 			{
 				// assign an integer to b, shifted by bit spaces AND 1
@@ -245,16 +246,16 @@ public class Steganography{
 	}
 	
 	/*
-	 *Retrieves hidden text from an image
+	 *retrieves hidden text from an image
 	 *@param image 		array of data, representing an image
 	 *@return 		array of data which contains the hidden text
-	 */
+	*/
 	private byte[] decode_text(byte[] image)
 	{
 		int length = 0;
 		int offset  = 32;
 		// loop through 32 bytes of data to determine text length
-		// i=24 will also work, as only the 4th byte contains real data
+		// i = 24 will also work, as only the 4th byte contains real data
 		for(int i = 0; i < 32; ++i) 
 		{
 			length = (length << 1) | (image[i] & 1);
