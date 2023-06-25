@@ -39,10 +39,10 @@ public class Steganography_Controller
 	private String stat_name = "";
 	
 	/*
-	 *Constructor to initialize view, model and environment variables
+	 *constructor to initialize view, model and environment variables
 	 *@param aView		a GUI class, to be saved as view
 	 *@param aModel 	a model class, to be saved as model
-	 */
+	*/
 	public Steganography_Controller(Steganography_View aView, Steganography aModel)
 	{
 		// program variables
@@ -77,8 +77,8 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Updates the single panel to display the Encode View.
-	 */
+	 *updates the single panel to display the encode View.
+	*/
 	private void encode_view()
 	{
 		update();
@@ -87,8 +87,8 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Updates the single panel to display the Decode View.
-	 */
+	 *updates the single panel to display the decode View.
+	*/
 	private void decode_view()
 	{
 		update();
@@ -97,14 +97,14 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Encode Class - handles the Encode menu item
-	 */
+	 *encode Class - handles the encode menu item
+	*/
 	private class Encode implements ActionListener
 	{
 		/*
 		 *handles the click event
 		 *@param e 		the ActionEvent Object
-		 */
+		*/
 		public void actionPerformed(ActionEvent e)
 		{
 			// show the encode view
@@ -113,14 +113,14 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Decode Class - handles the Decode menu item
-	 */
+	 *decode Class - handles the decode menu item
+	*/
 	private class Decode implements ActionListener
 	{
 		/*
 		 *handles the click event
 		 *@param e 		the ActionEvent Object
-		 */
+		*/
 		public void actionPerformed(ActionEvent e)
 		{
 			// show the decode view
@@ -155,14 +155,14 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Exit Class - handles the Exit menu item
-	 */
+	 *exit Class - handles the exit menu item
+	*/
 	private class Exit implements ActionListener
 	{
 		/*
 		 *handles the click event
 		 *@param e 		the ActionEvent Object
-		 */
+		*/
 		public void actionPerformed(ActionEvent e)
 		{
 			// exit the program
@@ -171,14 +171,14 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Encode Button Class - handles the Encode Button item
-	 */
+	 *Encode Button class - handles the Encode Button item
+	*/
 	private class EncodeButton implements ActionListener
 	{
 		/*
 		 *handles the click event
 		 *@param e 		the ActionEvent Object
-		 */
+		*/
 		public void actionPerformed(ActionEvent e)
 		{
 			// start path of displayed File Chooser
@@ -226,7 +226,7 @@ public class Steganography_Controller
 					image_input.setIcon(new ImageIcon(ImageIO.read(new File(path + "/" + stegan + ".png"))));
 				}
 				catch(Exception except) {
-				// message if opening fails
+					// message if opening fails
 					JOptionPane.showMessageDialog(
 						view, 
 						"The File cannot be opened!", 
@@ -240,14 +240,14 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Decode Button Class - handles the Decode Button item
-	 */
+	 *Decode Button class - handles the Decode Button item
+	*/
 	private class DecodeButton implements ActionListener
 	{
 		/*
 		 *handles the click event
 		 *@param e 		the ActionEvent Object
-		 */
+		*/
 		public void actionPerformed(ActionEvent e)
 		{
 			String message = model.decode(stat_path, stat_name);
@@ -276,8 +276,8 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Updates the variables to an initial state
-	 */
+	 *updates the variables to an initial state
+	*/
 	public void update()
 	{
 		// clear text area
@@ -291,8 +291,8 @@ public class Steganography_Controller
 	}
 	
 	/*
-	 *Main Method for testing
-	 */
+	 *main method for testing
+	*/
 	public static void main(String args[])
 	{
 		new Steganography_Controller(
